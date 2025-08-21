@@ -6,4 +6,6 @@ group :test do
   gem 'nokogiri'
   gem 'rackup'
   gem 'puma'
+  gem "sinatra"
+  gem 'sqlite3', '~> 1.5'
 end
