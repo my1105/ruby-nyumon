@@ -16,19 +16,23 @@ DB.execute <<-SQL
   );
 SQL
 
-get '/todos' do
-  @todos = DB.execute('SELECT title FROM todos').map { |row| row[0] }
+
+get '/' do
+  @todos = DB.execute('SELECT id, title FROM todos') 
   erb :todos
 end
 
-
 post '/todos' do
   DB.execute('INSERT INTO todos (title) VALUES (?)', [params[:title]])
-  redirect '/'
+  redirect '/' 
 end
 
+get '/todos/:id/edit' do
+  @todo = DB.execute('SELECT id, title FROM todos WHERE id = ?', [params[:id]]).first
+  erb :edit
+end
 
-get '/' do
-  @todos = DB.execute('SELECT title FROM todos').map { |row| row[0] }
+get '/todos' do
+  @todos = DB.execute('SELECT id, title FROM todos')
   erb :todos
 end

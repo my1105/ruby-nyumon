@@ -1,7 +1,11 @@
-<h1>TODO一覧</h1>
+<h1>TODO 一覧</h1>
+
 <ul>
   <% @todos.each do |todo| %>
-    <li><%= todo %></li>
+    <li>
+      <!-- TODOタイトルを編集画面へのリンクにする -->
+      <a href="/todos/<%= todo[0] %>/edit"><%= todo[1] %></a>
+    </li>
   <% end %>
 </ul>
 
