@@ -3,8 +3,20 @@
 require 'sinatra'
 require 'sqlite3'
 require 'json'
+require 'sinatra/activerecord'
+require './models/todo'
 
 enable :method_override  
+
+
+
+
+
+get '/todos' do
+  @todos = Todo.all
+  @todos.to_json
+end
+
 
 
 DB_PATHS = {

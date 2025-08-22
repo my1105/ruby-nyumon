@@ -7,5 +7,9 @@ group :test do
   gem 'rackup'
   gem 'puma'
   gem "sinatra"
-  gem 'sqlite3', '~> 1.5'
+  gem 'sqlite3', '~> 1.7'
+  gem 'sinatra-activerecord'
+  gem 'rake'
+  gem 'activerecord', '~> 7.0'
+
 end
