@@ -1,3 +1,4 @@
+# encoding: utf-8
 def foobar(n)
   (1..n).each do |i|
     if i % 3 == 0 && i % 5 == 0

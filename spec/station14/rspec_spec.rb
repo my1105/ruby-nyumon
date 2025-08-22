@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'spec_helper'
 require 'rack/test'
 require 'json'
@@ -9,7 +10,7 @@ RSpec.describe 'RSpec を使用してテストを書こう', clear_db: true do
 
     expect(File.exist?(station14_spec_file_path)).not_to be_falsey
 
-    file_content = File.read(station14_spec_file_path)
+    file_content = File.read(station14_spec_file_path, encoding: 'UTF-8')
     it_block_regex = /it\s+['"]指定したIDのTODOを取得できること['"]\s+do\s*\n?(.*?)\n?\s*end/m
     match_data = file_content.match(it_block_regex)
 

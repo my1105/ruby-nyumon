@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'sqlite3'
 
 DB_PATHS = {
