@@ -1,7 +1,9 @@
 <h1>TODO一覧</h1>
 <ul>
   <% @todos.each do |todo| %>
-    <li><%= todo[0] %>: <%= todo[1] %></li>
+    <li>
+      <a href="/todos/<%= todo[0] %>/edit"><%= todo[1] %></a>
+    </li>
   <% end %>
 </ul>
 

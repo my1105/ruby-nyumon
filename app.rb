@@ -36,15 +36,11 @@ DB.execute <<-SQL
   );
 SQL
 
+
 get '/' do
-  "Hello, World!"
+  @todos = DB.execute('SELECT id, title FROM todos')
+  erb :todos
 end
-
-
-# get '/' do
-#   @todos = DB.execute('SELECT id, title FROM todos')
-#   erb :todos
-# end
 
 post '/todos' do
   DB.execute('INSERT INTO todos (title) VALUES (?)', [params[:title]])
