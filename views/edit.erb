@@ -6,6 +6,12 @@
   <input type="submit" value="更新">
 </form>
 
+<form action="/todos/<%= @todo[0] %>" method="POST" style="margin-top:10px;">
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="削除" style="background-color:#e74c3c;color:white;">
+</form>
+
+
 <a href="/todos" class="back-link">戻る</a>
 
 <link rel="stylesheet" href="/styles.css">

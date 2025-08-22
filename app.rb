@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'sqlite3'
+enable :method_override
 
 DB_PATHS = {
   'development' => 'db/development.sqlite3',
@@ -41,3 +42,9 @@ put '/todos/:id' do
   DB.execute('UPDATE todos SET title = ? WHERE id = ?', [params[:title], params[:id]])
   redirect '/todos'  
 end
+
+delete '/todos/:id' do
+  DB.execute('DELETE FROM todos WHERE id = ?', [params[:id]])
+  redirect '/todos'
+end
+
