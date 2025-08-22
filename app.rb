@@ -36,3 +36,8 @@ get '/todos' do
   @todos = DB.execute('SELECT id, title FROM todos')
   erb :todos
 end
+
+put '/todos/:id' do
+  DB.execute('UPDATE todos SET title = ? WHERE id = ?', [params[:title], params[:id]])
+  redirect '/todos'  
+end

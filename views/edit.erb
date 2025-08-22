@@ -1,10 +1,11 @@
-<h1>TODO の編集</h1>
+<h1>TODOの編集</h1>
 
-<form action="/todos/<%= @todo[0] %>" method="POST">
+<form action="/todos/<%= @todo[0] %>" method="POST" class="edit-form">
   <input type="hidden" name="_method" value="PUT">
   <input type="text" name="title" value="<%= @todo[1] %>">
   <input type="submit" value="更新">
 </form>
 
-<!-- 戻るリンクはここ -->
-<a href="/todos">戻る</a>
+<a href="/todos" class="back-link">戻る</a>
+
+<link rel="stylesheet" href="/styles.css">
