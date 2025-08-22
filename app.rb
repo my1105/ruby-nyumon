@@ -1,5 +1,7 @@
 require 'sinatra'
 require 'sqlite3'
+require 'json'
+
 enable :method_override
 
 DB_PATHS = {
@@ -19,13 +21,13 @@ SQL
 
 
 get '/' do
-  @todos = DB.execute('SELECT id, title FROM todos') 
+  @todos = DB.execute('SELECT id, title FROM todos')
   erb :todos
 end
 
 post '/todos' do
   DB.execute('INSERT INTO todos (title) VALUES (?)', [params[:title]])
-  redirect '/' 
+  redirect '/'
 end
 
 get '/todos/:id/edit' do
@@ -33,18 +35,20 @@ get '/todos/:id/edit' do
   erb :edit
 end
 
-get '/todos' do
-  @todos = DB.execute('SELECT id, title FROM todos')
-  erb :todos
-end
-
 put '/todos/:id' do
   DB.execute('UPDATE todos SET title = ? WHERE id = ?', [params[:title], params[:id]])
-  redirect '/todos'  
+  redirect '/'
 end
 
 delete '/todos/:id' do
   DB.execute('DELETE FROM todos WHERE id = ?', [params[:id]])
-  redirect '/todos'
+  redirect '/'
+end
+
+
+get '/api/todos' do
+  content_type :json
+  todos = DB.execute('SELECT * FROM todos') 
+  JSON.pretty_generate(todos)
 end
 
