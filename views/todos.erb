@@ -1,8 +1,7 @@
 <h1>TODO一覧</h1>
-
 <ul>
   <% @todos.each do |todo| %>
-    <li><%= todo %></li>
+    <li><%= todo[0] %>: <%= todo[1] %></li>
   <% end %>
 </ul>
 

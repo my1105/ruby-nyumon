@@ -6,17 +6,19 @@ require 'json'
 require 'sinatra/activerecord'
 require './models/todo'
 
+set :bind, '0.0.0.0'
+set :port, 4567
 enable :method_override  
 
-
-
+before do
+  content_type 'text/html', charset: 'utf-8'
+end
 
 
 get '/todos' do
   @todos = Todo.all
   @todos.to_json
 end
-
 
 
 DB_PATHS = {
@@ -34,11 +36,15 @@ DB.execute <<-SQL
   );
 SQL
 
-
 get '/' do
-  @todos = DB.execute('SELECT id, title FROM todos')
-  erb :todos
+  "Hello, World!"
 end
+
+
+# get '/' do
+#   @todos = DB.execute('SELECT id, title FROM todos')
+#   erb :todos
+# end
 
 post '/todos' do
   DB.execute('INSERT INTO todos (title) VALUES (?)', [params[:title]])
@@ -60,7 +66,7 @@ delete '/todos/:id' do
   redirect '/'
 end
 
-
+# API
 get '/api/todos' do
   content_type :json
   todos = DB.execute('SELECT * FROM todos').map do |row|
@@ -69,13 +75,11 @@ get '/api/todos' do
   JSON.pretty_generate(todos)
 end
 
-
 get '/api/todos/:id' do
   content_type :json
   todo = DB.execute('SELECT * FROM todos WHERE id = ?', [params[:id]]).first
   JSON.pretty_generate(todo)
 end
-
 
 post '/api/todos' do
   content_type :json
@@ -85,14 +89,12 @@ post '/api/todos' do
   JSON.pretty_generate(todo)
 end
 
-
 put '/api/todos/:id' do
   content_type :json
   DB.execute('UPDATE todos SET title = ? WHERE id = ?', [params[:title], params[:id]])
   todo = DB.execute('SELECT * FROM todos WHERE id = ?', [params[:id]]).first
   JSON.pretty_generate(todo)
 end
-
 
 delete '/api/todos/:id' do
   content_type :json
